@@ -43,19 +43,16 @@ var repository= (function() {
   });
 
   function showDetails(item) {
-    $('.modal').html('');
-    $('#modal-container').addClass('is-visible');
-    $('.modal').append('<button class="modal-close"> Close </button>');
-    $('.modal-close').on('click', function (event) {
-      closeModal();
-    });
-    $('.modal').append( '<h2> ' + item.title + ' </h2> <p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>');
+    $('modal-header').html('');
+    $('modal-body').html('');
+    $('modal-header').append('<h5 class="modal-title">' + item.title +'</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');
+    $('modal-body').append( '<p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>');
   }
 
   function addListItem(movies) {
     var movieList = $('#movie-list');
-    var listItem = $('<li> </li>');
-    var button = $('<button type = "button" class="btn btn-light btn-lg btn-block">' + movies.title + '</button>');
+    var listItem = $('<li class="list-group-item align-items-center"> </li>');
+    var button = $('<button type = "button" class="btn btn-light btn-lg btn-block" data-toggle="modal" data-target="#modal-container">' + movies.title + '</button>');
     listItem.append(button);
     movieList.append(listItem);
     button.on('click', function(event) {
