@@ -43,21 +43,21 @@ var repository= (function() {
   });
 
   function showDetails(item) {
-    $('modal-header').html('');
-    $('modal-body').html('');
-    $('modal-header').append('<h5 class="modal-title">' + item.title +'</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');
-    $('modal-body').append( '<p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>');
+    $('.modal-header').empty();
+    $('.modal-body').empty();
+    $('.modal-header').append('<h5 class="modal-title"> ' + item.title + ' </h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');
+    $('.modal-body').append( '<p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>')
   }
 
   function addListItem(movies) {
     var movieList = $('#movie-list');
-    var listItem = $('<li class="list-group-item align-items-center"> </li>');
+    var listItem = $('<li class="list-group-item"> </li>');
     var button = $('<button type = "button" class="btn btn-light btn-lg btn-block" data-toggle="modal" data-target="#modal-container">' + movies.title + '</button>');
-    listItem.append(button);
-    movieList.append(listItem);
     button.on('click', function(event) {
       showDetails(movies);
     });
+    listItem.append(button);
+    movieList.append(listItem);
   }
 
   return {
@@ -76,19 +76,32 @@ repository.loadList().then(function() {
 
 
 
-var backToTop = (function() {
+$(document).ready(function(){
+     $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-to-top').click(function () {
+            $('#back-to-top').tooltip('hide');
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
 
-  var scrollToTopButton = $('#js-top');
+        $('#back-to-top').tooltip('show');
 
-  var scrollToTop = () => {
-      var c = document.documentElement.scrollTop || document.body.scrollTop;
-      if (c > 0) {
-        window.scrollTo(0, c - c / 10);
-      }
-    };
+});
 
-    scrollToTopButton.onclick = function(e) {
-      e.preventDefault();
-      scrollToTop();
-    }
-})();
+$(document).ready(function(){
+  $("#search-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
