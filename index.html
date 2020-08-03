@@ -26,11 +26,17 @@
       </div>
     </header>
     <div class= "main-content">
-      <input type="text" id="search-input" placeholder="Search for movies.." title="Type in a movie">
       <ul id= "movie-list" class= "list-group">
       </ul>
+      <div class="navbar fixed-bottom navbar-expand-lg" id="footer">
+        <input type="text" id="search-input" placeholder="Search for movies.." title="Type in a movie">
+      </div>
     </div>
     <div class="modal fade" id="modal-container" tabindex="-1" role="dialog">
+      <a class="carousel-control-prev" href="#">
+        <span class="carousel-control-prev-icon aria-hidden="true">
+        </span>
+      </a>
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -39,8 +45,12 @@
           </div>
         </div>
       </div>
+      <a class="carousel-control-next" href="#">
+        <span class="carousel-control-next-icon aria-hidden="true">
+        </span>
+      </a>
     </div>
-    <a id="back-to-top" href="#" class="btn btn-secondary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+    <a id="back-to-top" href="#" class="btn btn-secondary btn-lg back-to-top" role="button" title="To top of page" data-toggle="tooltip" data-placement="left">
       <img src="img/up-arrow.svg" alt="Back to top!" width= "20">
     </a>
     <script

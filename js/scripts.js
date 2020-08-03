@@ -47,6 +47,18 @@ var repository= (function() {
     $('.modal-body').empty();
     $('.modal-header').append('<h5 class="modal-title"> ' + item.title + ' </h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');
     $('.modal-body').append( '<p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>')
+    prevButton = $('.carousel-control-prev');
+    nextButton = $('.carousel-control-next');
+    prevButton.on('click', function(event) {
+      var lastItemIndex = list.indexOf(item) - 1;
+      var lastItem = list[ lastItemIndex ];
+      showDetails(lastItem);
+    })
+    nextButton.on('click', function(event) {
+      var nextItemIndex = list.indexOf(item) + 1;
+      var nextItem = list[ nextItemIndex ];
+      showDetails(nextItem);
+    })
   }
 
   function addListItem(movies) {
@@ -66,7 +78,7 @@ var repository= (function() {
     getAll: getAll,
     closeModal: closeModal,
     showDetails: showDetails,
-    addListItem: addListItem,
+    addListItem: addListItem
   }
 })();
 
@@ -84,7 +96,6 @@ $(document).ready(function(){
                 $('#back-to-top').fadeOut();
             }
         });
-        // scroll body to 0px on click
         $('#back-to-top').click(function () {
             $('#back-to-top').tooltip('hide');
             $('body,html').animate({
