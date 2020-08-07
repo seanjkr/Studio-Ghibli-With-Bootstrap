@@ -52,12 +52,16 @@ var repository= (function() {
     prevButton.on('click', function(event) {
       var lastItemIndex = list.indexOf(item) - 1;
       var lastItem = list[ lastItemIndex ];
-      showDetails(lastItem);
+      if(lastItemIndex > -1) {
+        showDetails(lastItem);
+      }
     })
     nextButton.on('click', function(event) {
       var nextItemIndex = list.indexOf(item) + 1;
       var nextItem = list[ nextItemIndex ];
-      showDetails(nextItem);
+      if(nextItemIndex < list.length) {
+        showDetails(nextItem);
+      }
     })
   }
 
