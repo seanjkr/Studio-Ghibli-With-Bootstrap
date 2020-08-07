@@ -19,8 +19,6 @@ var repository= (function() {
         };
         add(movies);
       });
-    }).catch(function (e) {
-      console.error(e);
     })
   }
 
@@ -32,7 +30,7 @@ var repository= (function() {
     modalContainer.removeClass('is-visible');
   }
 
-  $('#modal-container').on('click', function(event) {
+  $('#modal-container').on('click', function() {
     closeModal();
   })
 
@@ -47,16 +45,16 @@ var repository= (function() {
     $('.modal-body').empty();
     $('.modal-header').append('<h5 class="modal-title"> ' + item.title + ' </h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');
     $('.modal-body').append( '<p> Director: ' + item.director + ' </p> <p> Released: ' + item.release_date + '</p> <p>' + item.description + '</p>')
-    prevButton = $('.carousel-control-prev');
-    nextButton = $('.carousel-control-next');
-    prevButton.on('click', function(event) {
+    var prevButton = $('.carousel-control-prev');
+    var nextButton = $('.carousel-control-next');
+    prevButton.on('click', function() {
       var lastItemIndex = list.indexOf(item) - 1;
       var lastItem = list[ lastItemIndex ];
       if(lastItemIndex > -1) {
         showDetails(lastItem);
       }
     })
-    nextButton.on('click', function(event) {
+    nextButton.on('click', function() {
       var nextItemIndex = list.indexOf(item) + 1;
       var nextItem = list[ nextItemIndex ];
       if(nextItemIndex < list.length) {
@@ -69,7 +67,7 @@ var repository= (function() {
     var movieList = $('#movie-list');
     var listItem = $('<li class="list-group-item"> </li>');
     var button = $('<button type = "button" class="btn btn-light btn-lg btn-block" data-toggle="modal" data-target="#modal-container">' + movies.title + '</button>');
-    button.on('click', function(event) {
+    button.on('click', function() {
       showDetails(movies);
     });
     listItem.append(button);
@@ -113,9 +111,9 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $("#search-input").on("keyup", function() {
+  $('#search-input').on('keyup', function() {
     var value = $(this).val().toLowerCase();
-    $("li").filter(function() {
+    $('li').filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
